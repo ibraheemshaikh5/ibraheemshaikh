@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Archivo } from "next/font/google";
 import "./globals.css";
 
 // Clean, modern sans-serif for body text
@@ -8,11 +8,12 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-// Elegant serif for headings - adds personality & warmth
-const fraunces = Fraunces({
-  variable: "--font-serif",
+// Porsche-inspired geometric sans-serif for headings
+// Archivo has the same clean, precise, engineering feel as Porsche Next
+const archivo = Archivo({
+  variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${fraunces.variable} antialiased`}
+        className={`${inter.variable} ${archivo.variable} antialiased`}
       >
         {children}
       </body>

@@ -7,7 +7,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-serif: var(--font-serif);
+  --font-heading: var(--font-heading);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,54 +49,55 @@
 :root {
   --radius: 0.625rem;
 
-  /* Warm cream background like Hannah Park's site */
+  /* Warm cream background - keeping the warmth you like */
   --background: #fffbf5;
-  --foreground: #0f0f0f;
+  --foreground: #1a1a1a;
 
   /* Cards with slight warmth */
   --card: #fffdf9;
-  --card-foreground: #0f0f0f;
+  --card-foreground: #1a1a1a;
   --popover: #fffdf9;
-  --popover-foreground: #0f0f0f;
+  --popover-foreground: #1a1a1a;
 
   /* Primary: deep charcoal for bold text */
-  --primary: #0f0f0f;
+  --primary: #1a1a1a;
   --primary-foreground: #fffbf5;
 
-  /* Secondary: warm gray */
-  --secondary: #f5f2ed;
-  --secondary-foreground: #262626;
+  /* Secondary: Davit Grey - sophisticated neutral */
+  --secondary: #f0eeeb;
+  --secondary-foreground: #4a4a4a;
 
-  /* Muted: subtle warm tones */
-  --muted: #f5f2ed;
-  --muted-foreground: #6b6b6b;
+  /* Muted: Davit Grey tones */
+  --muted: #e8e6e3;
+  --muted-foreground: #6b6967;
 
-  /* Accent: warm golden yellow - your signature color */
-  --accent: #f5c542;
-  --accent-foreground: #0f0f0f;
+  /* Accent: Isle of Man Green - British Racing Green */
+  --accent: #004225;
+  --accent-foreground: #fffbf5;
 
-  /* Highlight: bolder yellow for CTAs */
-  --highlight: #fbbf24;
+  /* Accent variations for hover states */
+  --accent-light: #005c35;
+  --accent-dark: #00321c;
 
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #ededed;
-  --input: #ededed;
-  --ring: #f5c542;
+  --border: #e5e3e0;
+  --input: #e5e3e0;
+  --ring: #004225;
 
-  --chart-1: #f5c542;
-  --chart-2: #0f0f0f;
-  --chart-3: #6b6b6b;
-  --chart-4: #f5f2ed;
-  --chart-5: #fbbf24;
+  --chart-1: #004225;
+  --chart-2: #1a1a1a;
+  --chart-3: #6b6967;
+  --chart-4: #e8e6e3;
+  --chart-5: #005c35;
 
   --sidebar: #fffdf9;
-  --sidebar-foreground: #0f0f0f;
-  --sidebar-primary: #0f0f0f;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #004225;
   --sidebar-primary-foreground: #fffbf5;
-  --sidebar-accent: #f5f2ed;
-  --sidebar-accent-foreground: #262626;
-  --sidebar-border: #ededed;
-  --sidebar-ring: #f5c542;
+  --sidebar-accent: #e8e6e3;
+  --sidebar-accent-foreground: #4a4a4a;
+  --sidebar-border: #e5e3e0;
+  --sidebar-ring: #004225;
 }
 
 .dark {
@@ -140,4 +141,130 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Scroll-linked animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Section transitions */
+.section-enter {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+/* Card hover transitions - smoother */
+.bento-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s ease;
+}
+
+.bento-card:hover {
+  box-shadow: 0 20px 40px -15px rgba(0, 66, 37, 0.1);
+}
+
+/* World environments - distinct visual spaces */
+.hero-bg-overlay {
+  transition: opacity 0.3s ease;
+}
+
+.transition-zone {
+  position: relative;
+}
+
+.transition-zone::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  opacity: 0.2;
+}
+
+.bento-world {
+  position: relative;
+}
+
+.footer-world {
+  position: relative;
+}
+
+/* Parallax depth layers */
+.hero-decor-left,
+.hero-decor-right {
+  will-change: transform, opacity;
+}
+
+.hero-corner-decor {
+  will-change: transform, opacity, scale;
+}
+
+.bento-pattern {
+  will-change: transform;
+}
+
+.bento-side-accent {
+  will-change: transform;
+}
+
+/* Section line animations */
+.section-line-left,
+.section-line-right {
+  will-change: transform;
+}
+
+/* Footer arch animation */
+.footer-arch {
+  will-change: transform;
 }
